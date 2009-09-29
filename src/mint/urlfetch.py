@@ -16,6 +16,5 @@ def fetch(url, payload=None, method=GET, headers={}, allow_truncated=False, foll
         url += "?" + payload
         payload = None
     logging.debug("Fetching %s with %s" % (url, payload))
-    print "Fetching %s with %s" % (url, payload)
     ret = urllib2.urlopen(url, payload)
     return URLFetchResponse(ret)

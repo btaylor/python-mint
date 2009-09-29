@@ -9,7 +9,7 @@ class Test(unittest.TestCase):
     def test_tx(self):
         tx = Transaction.from_json(TEST_TRANSACTION, mint=mint.mint)
         assert tx.mint == mint.mint
-        assert mint.mint.tags['X Mom & Dad'] in tx.labels
-        assert mint.mint.tags['Reimbursable'] in tx.labels
+        assert mint.mint.tags['X Mom & Dad'] in tx.tags
+        assert mint.mint.tags['Reimbursable'] in tx.tags
         
            

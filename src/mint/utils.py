@@ -19,6 +19,12 @@ DATE_INPUT_FORMATS = (
     '%b %d %Y',              # 
 )
 
+def extract_element(xml, element):
+    start, end = "<%s>" % element, "</%s>" % element
+    i = xml.find(start)+len(start)
+    j = xml.find(end, i)
+    return xml[i:j]
+
 import datetime
 CURRENT_YEAR = datetime.datetime.now().year
 def parse_date(date, year=CURRENT_YEAR):

@@ -13,6 +13,20 @@ class TagSet(object):
         self.tags_id = dict((t.id, t) for t in self.tags)
         self.order_tags()
 
+    def add(self, tag):
+        self.tags.append(tag)
+        self.tags_set.add(tag)
+        self.tags_value[tag.value] = tag
+        self.tags_id[tag.id] = tag
+        self.order_tags()
+
+    def remove(self, key):
+        tag = self[key]
+        self.tags.remove(tag)
+        self.tags_set.remove(tag)
+        del self.tags_value[tag.value]
+        del self.tags_id[tag.id]
+
     def order_tags(self):
         self.tags.sort(key=lambda x: -len(x.value))
 
@@ -21,7 +35,7 @@ class TagSet(object):
             return self.tags_value[key]
         if key in self.tags_id:
             return self.tags_id[key]
-        raise KeyError
+        raise KeyError(key)
 
     def __contains__(self, obj):
         return obj in self.tags_set
@@ -50,22 +64,21 @@ class Tag(object):
     @staticmethod
     def from_json(data, mint, value_key='value'):
         return Tag(data['id'], data[value_key], mint=mint)
-
-    @staticmethod
-    def create(value):
-        pass
-
+    
     def __repr__(self):
         return '<Tag: %s>' % unicode(self)
 
     def __unicode__(self):
         return self.value
         
-    def __init__(self, id, value, mint=None):
+    def __init__(self, id, value, mint):
         self.mint = mint
 
         self.id = id
         self.value = value
+
+    def delete(self):
+        self.mint.delete_tag(tagId=self.id)
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:

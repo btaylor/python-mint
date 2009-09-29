@@ -13,13 +13,27 @@ class Test(unittest.TestCase):
     def test_tags(self):
         for r in mint.tags:
             assert r.id > 0
+            print r
 
-    def test_transactions(self):
+    def xtest_transactions(self):
         import datetime
         old_date = datetime.datetime.now()
         for t in islice(mint.transactions, 40):
             assert t.date <= old_date
             old_date = t.date
-#        assert False       
-            
+#        assert False    
+    
+    def xtest_update(self):
+        tx = mint.transactions.next()
+        tx.add_tag(mint.tags['Home'])
+        tx.update()
+         
+    def test_get_or_create_tag(self):
+        home, created = mint.get_or_create_tag('Home')   
+        if created:
+            home.delete()
+            assert False
+        random, created = mint.get_or_create_tag('XXTESTTAG')
+        random.delete()
+        assert created == True
         

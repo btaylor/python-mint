@@ -1,4 +1,5 @@
 import datetime
+import urlfetch
 from mint.tags import Tag, TagSet
 from mint.utils import parse_date
 
@@ -19,7 +20,7 @@ class Transaction(object):
     def from_json(data, mint, year=None):
         d = {'mint' : mint}
         d['date'] = parse_date(data['date'], year or datetime.datetime.now().year)
-        d['labels'] = TagSet.from_json(data['labels'], value_key='name', mint=mint)
+        d['tags'] = TagSet.from_json(data['labels'], value_key='name', mint=mint)
         for key in JSON_KEYS:
             d[key] = data[key]
         return Transaction(**d)
@@ -39,6 +40,12 @@ class Transaction(object):
             raise ValueError("Already have tag!")
         if tag not in self.mint.tags:
             raise ValueError("Tag does not exist!")
-        raise NotImplementedError
+        self.tags.add(tag)
 
+    def update(self):
+        d = {'task' : 'txnedit', 'txnId' : "%s:false" % self.id, 'token' : self.mint.token}
+        for tag in self.mint.tags:
+            d['tag%d' % tag.id] = 2 if tag in self.tags else 0
+        response = self.mint.fetch_url('updateTransaction.xevent', d, method=urlfetch.POST)
+        return response
 
