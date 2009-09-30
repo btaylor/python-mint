@@ -28,10 +28,10 @@ class Test(unittest.TestCase):
         tx.add_tag(mint.tags['Home'])
         tx.update()
          
-    def test_get_or_create_tag(self):
-        home, created = mint.get_or_create_tag('Home')   
+    def xtest_get_or_create_tag(self):
+        test, created = mint.get_or_create_tag('XX Test')   
         if created:
-            home.delete()
+            test.delete()
             assert False
         random, created = mint.get_or_create_tag('XXTESTTAG')
         random.delete()

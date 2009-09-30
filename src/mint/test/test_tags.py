@@ -14,5 +14,10 @@ class Test(unittest.TestCase):
         tagset = TagSet.from_json(TEST_TAGSET, mint.mint)
         assert len(tagset.parse('Reimbursable Mom & Dad')) == 2
 
-        
+    def test_tags(self):       
+        tagset1 = TagSet.from_json(TEST_TAGSET, mint.mint)
+        tagset2 = TagSet.from_json(TEST_TAGSET, mint.mint)
+        assert tagset1 != tagset2
+        for tag in tagset1:
+            assert id(tag) == id(tagset2[tag.name])
 
