@@ -1,8 +1,8 @@
 import datetime
 import urlfetch
 import copy
-from mint.tags import *
-from mint.utils import *
+from pymint.tags import *
+from pymint.utils import *
 
 class TransactionSet(object):
     def __init__(self, mint, query_string='', pyfilters=[]):

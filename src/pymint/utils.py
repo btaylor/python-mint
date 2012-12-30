@@ -1,7 +1,7 @@
 try:
     from google.appengine.api import urlfetch
 except ImportError:
-    from mint import urlfetch
+    from pymint import urlfetch
 try:
     import json
 except ImportError:

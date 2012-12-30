@@ -1,4 +1,4 @@
-from mint.utils import *
+from pymint.utils import *
 
 class TagSet(object):
     @staticmethod

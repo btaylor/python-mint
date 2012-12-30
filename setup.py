@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
  
 setup(
-    name='mint',
-    version='0.1.0',
+    name='pymint',
+    version='0.1.1',
     description='Python Mint API',
     author='Hisham Zarka',
     author_email='hzarka@gmail.com',

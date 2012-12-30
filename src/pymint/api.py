@@ -1,6 +1,6 @@
-from mint.utils import *
-from mint.tags import *
-from mint.transaction import *
+from pymint.utils import *
+from pymint.tags import *
+from pymint.transaction import *
 import time
 
 import csv

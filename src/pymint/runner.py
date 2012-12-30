@@ -1,8 +1,8 @@
-from mint.utils import *
-from mint.transaction import *
+from pymint.utils import *
+from pymint.transaction import *
 
 def run(d):
-    from mint import mint
+    from pymint import mint
     filters = []
     for key, value in d.items():
         if key.startswith('mint_') and callable(value):
